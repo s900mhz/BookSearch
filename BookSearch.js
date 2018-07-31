@@ -20,7 +20,7 @@ function displayBooks(data) {
         htmlString += '<div class="col-xs-3">';
         // Build up the HTML using the data from the API
         htmlString += '<img src="' + item.volumeInfo.imageLinks.thumbnail + '" alt="' + item.id + '" title="' + item.id + '", class ="img-thumbnail img-responsive"/><br/>';
-        htmlString += '<strong class="small">Pub: ' + item.volumeInfo.publishedDate + '</strong></div>';
+        htmlString += '<strong class="small">Publish Date: ' + item.volumeInfo.publishedDate + '</strong></div>';
         htmlString += '<div class="col-xs-9"><h1>' + item.volumeInfo.title + '</h1>';
         $.each(item.volumeInfo.authors, function (i, author) {
             htmlString += '<p class="bg-info"><i>' + author + '</i></p>';
