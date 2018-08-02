@@ -3,6 +3,7 @@ var BASE_URL = `https://www.googleapis.com/books/v1/volumes?key=AIzaSyBeXUW-Nknu
 
 $(document).ready(function () {
     $("#Search").on("click", function (event) {
+        $("#results").remove();
         let userBook = $("#book").val();
         getBookByTitle(userBook)
     });
@@ -14,19 +15,25 @@ function getBookByTitle(title) {
 };
 function displayBooks(data) {
 
-    let htmlString = "<div>";
-
+    let htmlString = "<div id='results'>";
+    
     $.each(data.items, function (i, item){
         htmlString += '<div class="col-xs-3">';
         // Build up the HTML using the data from the API
-        htmlString += '<img src="' + item.volumeInfo.imageLinks.thumbnail + '" alt="' + item.id + '" title="' + item.id + '", class ="img-thumbnail img-responsive"/><br/>';
+        if(typeof item.volumeInfo.imageLinks !== 'undefined'){
+            htmlString += '<img src="' + item.volumeInfo.imageLinks.thumbnail + '" alt="' + item.id + '" title="' + item.id + '", class ="img-thumbnail img-responsive"/><br/>';
+        }
+       
         htmlString += '<strong class="small">Publish Date: ' + item.volumeInfo.publishedDate + '</strong></div>';
         htmlString += '<div class="col-xs-9"><h1>' + item.volumeInfo.title + '</h1>';
         $.each(item.volumeInfo.authors, function (i, author) {
             htmlString += '<p class="bg-info"><i>' + author + '</i></p>';
         });
         htmlString += '<p class="small">' + item.volumeInfo.description + '</p>';
-        htmlString += '<p class="well small">Extract: "' + item.searchInfo.textSnippet + '"<a href="' + item.accessInfo.webReaderLink + '" target="_blank"> Read more</a></p>';
+        if(typeof item.searchInfo !== 'undefined'){
+            htmlString += '<p class="well small">Extract: "' + item.searchInfo.textSnippet + '"<a href="' + item.accessInfo.webReaderLink + '" target="_blank"> Read more</a></p>';
+        }
+        
         htmlString += '</div>';
         
     });
