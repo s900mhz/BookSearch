@@ -40,9 +40,3 @@ function displayBooks(data) {
     $("#booktitle").html(htmlString + "</div>")
 }
 
-//${search}&key=${yourAPIKey}
-//     $.get(url, function (response) {
-//     console.log(response);
-//     displayBooks(response.items["0"].volumeInfo.title)
-//  })
-//items[0].volumeInfo.title
