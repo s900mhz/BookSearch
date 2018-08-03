@@ -21,9 +21,11 @@ function displayBooks(data) {
         htmlString += '<div class="col-xs-3">';
         // Build up the HTML using the data from the API
         if(typeof item.volumeInfo.imageLinks !== 'undefined'){
-            htmlString += '<img src="' + item.volumeInfo.imageLinks.thumbnail + '" alt="' + item.id + '" title="' + item.id + '", class ="img-thumbnail img-responsive"/><br/>';
+            htmlString += '<img src="' + item.volumeInfo.imageLinks.thumbnail + '" alt="' + item.id + '" title="' + item.id + '", class ="img-fluid"/><br/>';
         }
-       
+        if(typeof item.volumeInfo.averageRating !== 'undefined'){
+            htmlString += `<div class="col-xs-3"> <img src="Star/${Math.round(item.volumeInfo.averageRating)}-star.png" class = "img-fluid" style="max-width: 10%"/> </div>`
+        }  
         htmlString += '<strong class="small">Publish Date: ' + item.volumeInfo.publishedDate + '</strong></div>';
         htmlString += '<div class="col-xs-9"><h1>' + item.volumeInfo.title + '</h1>';
         $.each(item.volumeInfo.authors, function (i, author) {
